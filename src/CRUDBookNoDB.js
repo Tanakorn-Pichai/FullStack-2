@@ -23,7 +23,10 @@ let books = [
 ];
 
 app.get("/", (req, res) => {
-  res.send("ไ'''ง");
+  res.send(`
+    <h1>Server Running</h1>
+    <a href="/books">Go to Books</a>
+  `);
 });
 
 app.get('/books', (req,res)=>{
@@ -38,7 +41,7 @@ app.get('/books/:id', (req,res) =>{
 });
 
 
-app.post('/books/post/',(req,res)=>{
+app.post('/books',(req,res)=>{
     
     const book = {
         id: books.length + 1,
