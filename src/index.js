@@ -6,8 +6,7 @@ const port = process.env.PORT || 7000;
 
 app.get("/", (req, res) => {
     res.send(`
-    <h1>Server Running</h1>
-    <a href="/books">Go to Books</a>
+    Ha lo 
   `);});
 
 app.listen(port, () => {
