@@ -1,12 +1,13 @@
 const express= require('express');
 const Sequelize = require('sequelize');
 const app = express(); 
-
+// start the server
+const port = process.env.PORT || 3000;
 app.use(express.json());
 const sequelize= new Sequelize('database','username','password',{
     host: 'localhost',
     dialect:'sqlite',
-    storage: '/Database/SQBook.sqlite'
+   storage: './Database/SQBook.sqlite'
 
 });
 
@@ -17,15 +18,24 @@ const Book = sequelize.define('book',{
         autoIncrement:true,
         primaryKey:true
     },title:{
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull:false
     },
-    authour:{
-        type: Sequelize.INTEGER,
+    author :{
+        type: Sequelize.STRING,
         allowNull:false
     }
 });
 sequelize.sync();
+app.get("/", (req, res) => {
+    res.send(`
+    Ha lo 
+  `);});
+
+app.listen(port, () => {
+ console.log(`Server running at http://localhost:${port}`);
+});
+
 // route to get all books
 app.get('/books', (req, res) => {
   Book.findAll().then(books => {
@@ -91,7 +101,7 @@ app.delete('/books/:id', (req, res) => {
   });
 });
 
-// start the server
-const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`Listening on port ${port}...`));
+
+
+
 
